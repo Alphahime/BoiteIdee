@@ -24,12 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 showMessage('success', 'Votre idée a été mise à jour avec succès !');
             }
             form.reset();
+            form.style.display = 'block'; 
         } else {
-            showMessage('error', 'Veuillez remplir tous les champs correctement.');
+            showMessage('erreur', 'Le libellé doit être entre 3 et 15 caractères.');
+            form.style.display = 'none'; 
         }
     });
 
     function validateForm(titre, categorie, description) {
+        if (titre.length < 3 || titre.length > 15) {
+            return false;
+        }
         return titre !== '' && categorie !== '' && description !== '';
     }
 
@@ -41,6 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             messages.removeChild(messageElement);
+            if (type === 'erreur') {
+                form.style.display = 'block'; 
+            }
+        }, 2000);
+        
+     
+        setTimeout(() => {
+            form.style.display = 'block';
         }, 2000);
     }
 
