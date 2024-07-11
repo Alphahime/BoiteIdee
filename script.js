@@ -1,9 +1,13 @@
+import { deleteIdea } from './delete.js';
+import { editIdea } from './edit.js';
+import { approveIdea } from './approve.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formeIdee');
     const messages = document.getElementById('messages');
     const listeIdee = document.getElementById('listeIdee');
     let idees = [];
-    let editIndex = null;
+    let editIndex = { value: null };
 
     form.addEventListener('submit', function(event){
         event.preventDefault();
@@ -12,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const description = document.getElementById('description').value.trim();
          
         if (validateForm(titre, categorie, description)) {
-            if (editIndex === null) {
+            if (editIndex.value === null) {
                 addIdee(titre, categorie, description);
                 showMessage('success', 'Votre idée a été soumise avec succès !');
             } else {
@@ -50,8 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateIdee(titre, categorie, description) {
-        idees[editIndex] = { titre, categorie, description, approved: idees[editIndex].approved };
-        editIndex = null;
+        idees[editIndex.value] = { titre, categorie, description, approved: idees[editIndex.value].approved };
+        editIndex.value = null;
         displayIdees();
     }
 
@@ -64,29 +68,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3>${idee.titre}</h3>
                 <p>Catégorie: ${idee.categorie}</p>
                 <p>${idee.description}</p>
-                <button onclick="approveIdea(${index})">${idee.approved ? 'Désapprouver' : 'Approuver'}</button>
-                <button onclick="editIdea(${index})">Modifier</button>
-                <button onclick="deleteIdea(${index})">Supprimer</button>
+                <button class="approve" data-index="${index}">${idee.approved ? 'Désapprouver' : 'Approuver'}</button>
+                <button class="edit" data-index="${index}">Modifier</button>
+                <button class="delete" data-index="${index}">Supprimer</button>
             `;
             listeIdee.appendChild(ideeElement);
         });
-    }
 
-    window.approveIdea = function(index) {
-        idees[index].approved = !idees[index].approved;
-        displayIdees();
-    }
+        document.querySelectorAll('.approve').forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                approveIdea(index, idees, displayIdees);
+            });
+        });
 
-    window.editIdea = function(index) {
-        const idee = idees[index];
-        document.getElementById('titre').value = idee.titre;
-        document.getElementById('categorie').value = idee.categorie;
-        document.getElementById('description').value = idee.description;
-        editIndex = index;
-    }
+        document.querySelectorAll('.edit').forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                editIdea(index, idees, form, editIndex);
+            });
+        });
 
-    window.deleteIdea = function(index) {
-        idees.splice(index, 1);
-        displayIdees();
+        document.querySelectorAll('.delete').forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                deleteIdea(index, idees, displayIdees);
+            });
+        });
     }
 });
