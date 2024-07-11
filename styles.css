@@ -53,14 +53,14 @@ button:hover {
     background-color: #0c5e5f;
 }
 
-#erreur, #success {
-    text-align: center;
-    margin-top: 10px;
-    display: none;
+#messages .success {
+    color: green;
+    margin-bottom: 10px;
 }
 
-#erreur {
+#messages .erreur{
     color: red;
+    margin-bottom: 10px;
 }
 
 #success {

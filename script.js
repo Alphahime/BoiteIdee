@@ -35,15 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showMessage(type, message) {
         const messageElement = document.createElement('div');
-        messageElement.id = type;
+        messageElement.classList.add(type);
         messageElement.textContent = message;
-
-        form.style.display = 'none';
         messages.appendChild(messageElement);
 
         setTimeout(() => {
             messages.removeChild(messageElement);
-            form.style.display = 'block';
         }, 2000);
     }
 
