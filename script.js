@@ -24,13 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 showMessage('success', 'Votre idée a été mise à jour avec succès !');
             }
             form.reset();
-        } else {
-            showMessage('erreur', 'Le libellé doit être entre 3 et 15 caractères.');
         }
     });
 
     function validateForm(titre, categorie, description) {
         if (titre.length < 3 || titre.length > 15) {
+            showMessage('erreur', 'Le libellé doit être entre 3 et 15 caractères.');
+            return false;
+        }
+        if (description.length > 255) {
+            showMessage('erreur', 'Le message ne peut pas dépasser 255 caractères.');
             return false;
         }
         return titre !== '' && categorie !== '' && description !== '';
@@ -71,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const ideeElement = document.createElement('div');
             ideeElement.classList.add('idea');
             if (!idee.approved) {
-                ideeElement.classList.add('disapproved'); // Ajoute la classe disapproved si l'idée n'est pas approuvée
+                ideeElement.classList.add('disapproved'); 
             }
             ideeElement.innerHTML = `
                 <h3>${idee.titre}</h3>
