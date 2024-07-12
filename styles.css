@@ -1,3 +1,4 @@
+/* Styles généraux */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -118,9 +119,11 @@ button:hover {
     background-color: #ffffff;
     color: black;
 }
+
 .idea.disapproved {
     border: 2px solid rgb(158, 6, 6);
 }
+
 .idea {
     border: 2px solid green; 
     padding: 10px;
@@ -141,3 +144,37 @@ button:hover {
     color: red;
 }
 
+/* Styles pour les écrans plus petits */
+@media (max-width: 768px) {
+    h1, h2 {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        border-top-right-radius: 0;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .idea-list {
+        grid-template-columns: 1fr;
+    }
+
+    .idea {
+        padding: 15px;
+    }
+
+    .idea button {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
