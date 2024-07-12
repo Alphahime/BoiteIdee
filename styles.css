@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.8); /* Couleur de fond avec opacité noire */
-    background-image: url('img/correctioncachebosstrap.png');
+    background-image: url('img/backgroundFirst.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -113,5 +113,24 @@ button:hover {
 }
 .idea.disapproved {
     border: 2px solid rgb(158, 6, 6);
+}
+.idea {
+    border: 2px solid green; 
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.idea.disapproved {
+    border-color: red; 
+}
+
+.success {
+    color: green;
+}
+
+.erreur {
+    color: red;
 }
 
