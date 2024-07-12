@@ -2,13 +2,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8); /* Couleur de fond avec opacité */
+    background-color: rgba(0, 0, 0, 0.8); /* Couleur de fond avec opacité noire */
     background-image: url('img/correctioncachebosstrap.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
-
 
 h1, h2 {
     text-align: center;
@@ -80,6 +79,13 @@ button:hover {
     padding: 20px;
     margin-bottom: 20px;
     text-align: center;
+    transition: background-color 0.3s ease; 
+    cursor: pointer;
+}
+
+.idea:hover {
+    background-color: #0c5e5f; 
+    color: white;
 }
 
 .idea h3 {
@@ -102,5 +108,10 @@ button:hover {
 }
 
 .idea button:hover {
-    background-color: #0c5e5f;
+    background-color: #ffffff;
+    color: black;
 }
+.idea.disapproved {
+    border: 2px solid rgb(158, 6, 6);
+}
+

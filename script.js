@@ -70,6 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
         idees.forEach((idee, index) => {
             const ideeElement = document.createElement('div');
             ideeElement.classList.add('idea');
+            if (!idee.approved) {
+                ideeElement.classList.add('disapproved'); // Ajoute la classe disapproved si l'idée n'est pas approuvée
+            }
             ideeElement.innerHTML = `
                 <h3>${idee.titre}</h3>
                 <p>Catégorie: ${idee.categorie}</p>
@@ -80,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             listeIdee.appendChild(ideeElement);
         });
-       
+
         document.querySelectorAll('.approve').forEach(button => {
             button.addEventListener('click', function() {
                 const index = this.getAttribute('data-index');
