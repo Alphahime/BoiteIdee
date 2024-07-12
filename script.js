@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>Catégorie: ${idee.categorie}</p>
                 <p>${idee.description}</p>
                 <button class="approve" data-index="${index}">${idee.approved ? 'Désapprouver' : 'Approuver'}</button>
-                <button class="edit" data-index="${index}">Modifier</button>
-                <button class="delete" data-index="${index}">Supprimer</button>
+                <button class="edit" data-index="${index}"><i class="fas fa-edit"></i></button>
+                <button class="delete" data-index="${index}"><i class="fas fa-trash-alt"></i></button>
             `;
             listeIdee.appendChild(ideeElement);
         });
