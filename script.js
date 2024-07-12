@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formeIdee');
     const messages = document.getElementById('messages');
     const listeIdee = document.getElementById('listeIdee');
-    let idees = [];
+    let idees = JSON.parse(localStorage.getItem('idees')) || [];
     let editIndex = { value: null };
 
     form.addEventListener('submit', function(event){
@@ -24,10 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 showMessage('success', 'Votre idée a été mise à jour avec succès !');
             }
             form.reset();
-            form.style.display = 'block'; 
         } else {
             showMessage('erreur', 'Le libellé doit être entre 3 et 15 caractères.');
-            form.style.display = 'none'; 
         }
     });
 
@@ -46,34 +44,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             messages.removeChild(messageElement);
-            if (type === 'erreur') {
-                form.style.display = 'block'; 
-            }
-        }, 2000);
-        
-     
-        setTimeout(() => {
-            form.style.display = 'block';
         }, 2000);
     }
 
     function addIdee(titre, categorie, description) {
         const idee = { titre, categorie, description, approved: false };
         idees.push(idee);
+        saveToLocalStorage();
         displayIdees();
     }
 
     function updateIdee(titre, categorie, description) {
         idees[editIndex.value] = { titre, categorie, description, approved: idees[editIndex.value].approved };
         editIndex.value = null;
+        saveToLocalStorage();
         displayIdees();
+    }
+
+    function saveToLocalStorage() {
+        localStorage.setItem('idees', JSON.stringify(idees));
     }
 
     function displayIdees() {
         listeIdee.innerHTML = '';
         idees.forEach((idee, index) => {
             const ideeElement = document.createElement('div');
-            ideeElement.classList.add('idee');
+            ideeElement.classList.add('idea');
             ideeElement.innerHTML = `
                 <h3>${idee.titre}</h3>
                 <p>Catégorie: ${idee.categorie}</p>
@@ -84,11 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             listeIdee.appendChild(ideeElement);
         });
-
+       
         document.querySelectorAll('.approve').forEach(button => {
             button.addEventListener('click', function() {
                 const index = this.getAttribute('data-index');
                 approveIdea(index, idees, displayIdees);
+                saveToLocalStorage(); 
             });
         });
 
@@ -103,7 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', function() {
                 const index = this.getAttribute('data-index');
                 deleteIdea(index, idees, displayIdees);
+                saveToLocalStorage();
             });
         });
     }
+
+    displayIdees();
 });
