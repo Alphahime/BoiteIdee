@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,28 +10,42 @@
 <body>
     <h1>Partagez vos idées</h1>
     <div class="container">
-        <form id="formeIdee" action="">
+        <div class="form-container">
+            <form id="formeIdee" action="">
+                <div class="form-group">
+                    <label for="titre">Libellé</label>
+                    <input type="text" id="titre" name="titre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categorie">Catégorie</label>
+                    <select id="categorie" name="categorie" required>
+                        <option value="politique">Politique</option>
+                        <option value="sport">Sport</option>
+                        <option value="sante">Santé</option>
+                        <option value="education">Éducation</option>
+                        <option value="economie">Économie</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Message</label>
+                    <textarea id="description" name="description" maxlength="255" required></textarea>
+                </div>
+
+                <button type="submit">Soumettre</button>
+              
+            </form>
             
-            <label for="titre">Libellé</label>
-            <input type="text" id="titre" name="titre" required>
+        </div>  <div class="image-container">
+            <img src="img/boite-image.jpeg" alt="Image description">
+        </div>
 
-            <label for="categorie">Catégorie</label>
-            <select id="categorie" name="categorie" required>
-                <option value="politique">Politique</option>
-                <option value="sport">Sport</option>
-                <option value="sante">Santé</option>
-                <option value="education">Éducation</option>
-                <option value="economie">Économie</option>
-            </select>
-
-            <label for="description">Message</label>
-            <textarea id="description" name="description" maxlength="255" required></textarea>
-           
-
-            <button type="submit">Soumettre</button>
-        </form>
-        <div id="messages"></div>
+       
     </div>
+
+    <div id="messages"></div>
+
     <div id="listeIdee" class="idea-list"></div>
 
     <script type="module" src="delete.js"></script>
