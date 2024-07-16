@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boîte à Idées avec Firebase Realtime Database</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Application de boîte à idées</title>
+    <!-- Inclure Font Awesome pour les icônes -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-database-compat.js"></script>
 </head>
 <body>
-    <h1>Partagez vos idées</h1>
+    <h1>Boîte à Idées avec Firebase Realtime Database</h1>
+    
     <div class="container">
         <div class="form-container">
-            <form id="formeIdee" action="">
-                <div class="form-group">
-                    <label for="titre">Libellé</label>
+            <form id="formeIdee">
+                <input type="hidden" id="ideeId" name="ideeId">
+                <div>
+                    <label for="titre">Libellé:</label>
                     <input type="text" id="titre" name="titre" required>
                 </div>
-
-                <div class="form-group">
-                    <label for="categorie">Catégorie</label>
+                <div>
+                    <label for="categorie">Catégorie:</label>
                     <select id="categorie" name="categorie" required>
                         <option value="politique">Politique</option>
                         <option value="sport">Sport</option>
@@ -27,30 +31,25 @@
                         <option value="economie">Économie</option>
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <label for="description">Message</label>
+                <div>
+                    <label for="description">Message:</label>
                     <textarea id="description" name="description" maxlength="255" required></textarea>
                 </div>
-
                 <button type="submit">Soumettre</button>
-              
             </form>
             
-        </div>  <div class="image-container">
+        </div>
+        <div class="image-container">
             <img src="img/boite-image.jpeg" alt="Image description">
         </div>
-
-       
     </div>
 
     <div id="messages"></div>
-
     <div id="listeIdee" class="idea-list"></div>
 
+    <script type="module" src="approve.js"></script>
     <script type="module" src="delete.js"></script>
     <script type="module" src="edit.js"></script>
-    <script type="module" src="approve.js"></script>
     <script type="module" src="script.js"></script>
 </body>
 </html>
